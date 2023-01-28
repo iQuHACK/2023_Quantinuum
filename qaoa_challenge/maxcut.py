@@ -12,12 +12,12 @@ expected_results = [(0, 1, 0, 0, 1, 0, 0), (1, 0, 1, 1, 0, 1, 1)]
 from typing import List, Tuple, Callable
 from pytket.utils import QubitPauliOperator
 from pytket.pauli import QubitPauliString, Pauli
-from pytket import Qubit, Circuit
+from pytket import Circuit, Qubit
 import numpy as np
 
 
 def qaoa_graph_to_cost_hamiltonian(
-    edges: List[Tuple[int, int]], cost_angle: float
+        edges: List[Tuple[int, int]], cost_angle: float
 ) -> QubitPauliOperator:
     qpo_dict = {QubitPauliString(): len(edges) * 0.5 * cost_angle}
     for e in edges:
@@ -43,12 +43,11 @@ from pytket.passes import DecomposeBoxes
 
 
 def qaoa_max_cut_circuit(
-    edges: List[Tuple[int, int]],
-    n_nodes: int,
-    mixer_angles: List[float],
-    cost_angles: List[float],
+        edges: List[Tuple[int, int]],
+        n_nodes: int,
+        mixer_angles: List[float],
+        cost_angles: List[float],
 ) -> Circuit:
-
     assert len(mixer_angles) == len(cost_angles)
 
     # initial state
@@ -83,12 +82,12 @@ from pytket.backends.backend import Backend
 
 
 def qaoa_instance_simple(
-    backend: Backend,
-    compiler_pass: Callable[[Circuit], bool],
-    guess_mixer_angles: np.array,
-    guess_cost_angles: np.array,
-    seed: int,
-    shots: int = 5000,
+        backend: Backend,
+        compiler_pass: Callable[[Circuit], bool],
+        guess_mixer_angles: np.array,
+        guess_cost_angles: np.array,
+        seed: int,
+        shots: int = 5000,
 ) -> float:
     # step 1: get state guess
     my_prep_circuit = qaoa_max_cut_circuit(
@@ -102,14 +101,13 @@ def qaoa_instance_simple(
 
 
 def qaoa_optimise_energy(
-    compiler_pass: Callable[[Circuit], bool],
-    backend: Backend,
-    iterations: int = 100,
-    n: int = 3,
-    shots: int = 5000,
-    seed: int = 12345,
+        compiler_pass: Callable[[Circuit], bool],
+        backend: Backend,
+        iterations: int = 100,
+        n: int = 3,
+        shots: int = 5000,
+        seed: int = 12345,
 ):
-
     highest_energy = 0
     best_guess_mixer_angles = [0 for i in range(n)]
     best_guess_cost_angles = [0 for i in range(n)]
@@ -131,7 +129,6 @@ def qaoa_optimise_energy(
         )
 
         if qaoa_energy > highest_energy:
-
             print("new highest energy found: ", qaoa_energy)
 
             best_guess_mixer_angles = guess_mixer_angles
@@ -145,13 +142,12 @@ def qaoa_optimise_energy(
 
 
 def qaoa_calculate(
-    backend: Backend,
-    compiler_pass: Callable[[Circuit], bool],
-    shots: int = 5000,
-    iterations: int = 100,
-    seed: int = 12345,
+        backend: Backend,
+        compiler_pass: Callable[[Circuit], bool],
+        shots: int = 5000,
+        iterations: int = 100,
+        seed: int = 12345,
 ) -> float:
-
     # find the parameters for the highest energy
     best_mixer, best_cost = qaoa_optimise_energy(
         compiler_pass, backend, iterations, 3, shots=shots, seed=seed
