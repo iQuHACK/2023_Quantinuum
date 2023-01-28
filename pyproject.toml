@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "2023-quantinuum"
+version = "0.1.0"
+description = "iQuHACK Quantinuum in-person challenge"
+authors = ["Julian Stamp, Daniel Qenani, Neophytos Christou, Nick Gutierrez, Alan Bidart"]
+readme = "README.md"
+packages = [{include = "2023_quantinuum"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pytket = "^1.11.1"
+matplotlib = "^3.6.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
