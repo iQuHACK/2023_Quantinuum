@@ -1,15 +1,16 @@
 [tool.poetry]
 name = "2023-quantinuum"
 version = "0.1.0"
-description = "iQuHACK Quantinuum in-person challenge"
-authors = ["Julian Stamp, Daniel Qenani, Neophytos Christou, Nick Gutierrez, Alan Bidart"]
+description = ""
+authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 packages = [{include = "2023_quantinuum"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 pytket = "^1.11.1"
-matplotlib = "^3.6.3"
+pytket-qiskit = "^0.34.0"
+pytket-quantinuum = "^0.13.0"
 
 
 [build-system]
