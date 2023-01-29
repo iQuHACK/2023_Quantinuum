@@ -1,4 +1,5 @@
-![Logo](https://github.com/GloverTheProgrammer/Espada/blob/main/suppport/wordmark-01.png)
+![Logo](https://github.com/GloverTheProgrammer/Espada/blob/main/suppport/wordmark-01.png?raw=true)
+
 # iQuHack 2023: Quantinuum
 
 ## Team Name: Espada
