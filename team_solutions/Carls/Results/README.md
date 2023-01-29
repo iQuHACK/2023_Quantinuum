@@ -26,15 +26,15 @@ We held shots and tol constant in this trial, however we think that these would 
 <img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="600">
 
 # 3
-<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="600>
+<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="600">
 
 # 4
-<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="600>
+<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="600">
 
 # 5
-<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="600>
+<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="600">
 
 # 6
-<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="600>
+<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="600">
 
 
