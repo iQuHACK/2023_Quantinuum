@@ -1,6 +1,6 @@
 # List of Projects
 
-### Sample Team
+### Neophytes
 
-- [Code](TEAM_NAME)
-- [Documentation](https://url_to_documentation.com)
+- [Code](neophytes)
+- [Documentation](neophytes/neophytes.md)
