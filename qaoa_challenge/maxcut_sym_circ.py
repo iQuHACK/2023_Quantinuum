@@ -17,7 +17,8 @@ from maxcut_plotting import plot_maxcut_results
 def qaoa_graph_to_cost_hamiltonian(edges: List[Tuple[int, int]], cost_angle: float) -> QubitPauliOperator:
     qpo_dict = {QubitPauliString(): len(edges) * 0.5 * cost_angle}
     for e in edges:
-        term_string = QubitPauliString([Qubit(e[0]), Qubit(e[1])], [Pauli.Z, Pauli.Z])
+        term_string = QubitPauliString(
+            [Qubit(e[0]), Qubit(e[1])], [Pauli.Z, Pauli.Z])
         qpo_dict[term_string] = -0.5 * cost_angle
     return QubitPauliOperator(qpo_dict)
 
@@ -29,35 +30,39 @@ def qaoa_initial_circuit(n_qubits: int) -> Circuit:
     return c
 
 
-def qaoa_max_cut_circuit(
-    edges: List[Tuple[int, int]],
-    n_nodes: int,
-    mixer_angles: List[float],
+def qaoa_max_cut_circuit_symbolic(edges: List[Tuple[int, int]], n_nodes: int, n: int):
+    qaoa_circuit_sym = qaoa_initial_circuit(n_nodes)
+    cost_syms = []
+    mixer_syms = []
+    for _ in range(n):
+        cost_sym = fresh_symbol("cost")
+        cost_syms.append(cost_sym)
+        mixer_sym = fresh_symbol("mixer")
+        mixer_syms.append(mixer_sym)
+        cost_ham_sym = qaoa_graph_to_cost_hamiltonian(edges, cost_sym)
+        mixer_ham_sym = QubitPauliOperator(
+            {QubitPauliString([Qubit(i)], [Pauli.X]): mixer_sym for i in range(n_nodes)})
+        qaoa_circuit_sym.append(gen_term_sequence_circuit(
+            cost_ham_sym, Circuit(n_nodes)))
+        qaoa_circuit_sym.append(gen_term_sequence_circuit(
+            mixer_ham_sym, Circuit(n_nodes)))
+
+    DecomposeBoxes().apply(qaoa_circuit_sym)
+    return cost_syms, mixer_syms, qaoa_circuit_sym
+
+
+def qaoa_max_cut_circuit_fill(
     cost_angles: List[float],
-) -> Circuit:
-    assert len(mixer_angles) == len(cost_angles)
+    mixer_angles: List[float],
+):
+    global cost_syms, mixer_syms, sym_circ
 
-    # initial state
-    qaoa_circuit = qaoa_initial_circuit(n_nodes)
+    circ = sym_circ.copy()
+    sym_args = {k: v for k, v in zip(cost_syms, cost_angles)}
+    sym_args.update({k: v for k, v in zip(mixer_syms, mixer_angles)})
+    circ.symbol_substitution(sym_args)
 
-    # add cost and mixer terms to state
-    for cost, mixer in zip(cost_angles, mixer_angles):
-        cost_ham = qaoa_graph_to_cost_hamiltonian(edges, cost)
-        mixer_ham = QubitPauliOperator({QubitPauliString([Qubit(i)], [Pauli.X]): mixer for i in range(n_nodes)})
-        qaoa_circuit.append(gen_term_sequence_circuit(cost_ham, Circuit(n_nodes)))
-        qaoa_circuit.append(gen_term_sequence_circuit(mixer_ham, Circuit(n_nodes)))
-
-    DecomposeBoxes().apply(qaoa_circuit)
-    return qaoa_circuit
-
-
-def max_cut_energy(edges: List[Tuple[int, int]], results: BackendResult) -> float:
-    energy = 0.0
-    dist = results.get_distribution()
-    for i, j in edges:
-        energy += sum((meas[i] ^ meas[j]) * prob for meas, prob in dist.items())
-
-    return energy
+    return circ
 
 
 def qaoa_instance_simple(
@@ -69,7 +74,8 @@ def qaoa_instance_simple(
     shots: int = 5000,
 ) -> float:
     # step 1: get state guess
-    my_prep_circuit = qaoa_max_cut_circuit(max_cut_graph_edges, n_nodes, guess_mixer_angles, guess_cost_angles)
+    my_prep_circuit = qaoa_max_cut_circuit_fill(
+        guess_mixer_angles, guess_cost_angles)
     measured_circ = my_prep_circuit.copy().measure_all()
     compiler_pass(measured_circ)
     res = backend.run_circuit(measured_circ, shots, seed=seed)
@@ -126,10 +132,11 @@ def qaoa_calculate(
     seed: int = 12345,
 ) -> float:
     # find the parameters for the highest energy
-    best_mixer, best_cost = qaoa_optimise_energy(compiler_pass, backend, iterations, 3, shots=shots, seed=seed)
+    best_mixer, best_cost = qaoa_optimise_energy(
+        compiler_pass, backend, iterations, 3, shots=shots, seed=seed)
 
     # get the circuit with the final parameters of the optimisation:
-    my_qaoa_circuit = qaoa_max_cut_circuit(max_cut_graph_edges, n_nodes, best_mixer, best_cost)
+    my_qaoa_circuit = qaoa_max_cut_circuit(best_mixer, best_cost)
 
     my_qaoa_circuit.measure_all()
 
@@ -156,6 +163,10 @@ print(cost_ham_qpo)
 
 backend = AerBackend()
 comp = backend.get_compiled_circuit
+
+# Create a symbolic circuit and collect the symbols
+cost_syms, mixer_syms, sym_circ = qaoa_max_cut_circuit_symbolic(
+    max_cut_graph_edges, n_nodes, 3)
 iters = 100
 
 start = time.time()

@@ -7,6 +7,7 @@ from pytket import Circuit, Qubit
 from pytket.backends.backend import Backend
 from pytket.backends.backendresult import BackendResult
 from pytket.extensions.qiskit import AerBackend
+from pytket.extensions.quantinuum import QuantinuumBackend
 from pytket.passes import DecomposeBoxes
 from pytket.pauli import Pauli, QubitPauliString
 from pytket.utils import QubitPauliOperator, gen_term_sequence_circuit
@@ -146,7 +147,7 @@ n_nodes = 7
 
 max_cut_graph = nx.Graph()
 max_cut_graph.add_edges_from(max_cut_graph_edges)
-nx.draw(max_cut_graph, labels={node: node for node in max_cut_graph.nodes()})
+# nx.draw(max_cut_graph, labels={node: node for node in max_cut_graph.nodes()})
 
 expected_results = [(0, 1, 0, 0, 1, 0, 0), (1, 0, 1, 1, 0, 1, 1)]
 
@@ -155,9 +156,11 @@ cost_ham_qpo = qaoa_graph_to_cost_hamiltonian(max_cut_graph_edges, cost_angle)
 print(cost_ham_qpo)
 
 backend = AerBackend()
+# backend = QuantinuumBackend("H1-2E")
+# Total time for 100 iterations (ms): 87038.1588935852 80150.33507347107
 comp = backend.get_compiled_circuit
-iters = 100
-
+iters = 10
+# 86
 start = time.time()
 res = qaoa_calculate(
     backend,
@@ -170,4 +173,4 @@ res = qaoa_calculate(
 end = time.time()
 print(f"Total time for {iters} iterations (ms): {(end - start) * 1000}")
 
-plot_maxcut_results(res, 6)
+# plot_maxcut_results(res, 6)
