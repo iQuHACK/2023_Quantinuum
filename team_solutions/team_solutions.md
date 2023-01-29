@@ -1,6 +1,6 @@
 # List of Projects
 
-### InsertTeamCode
+### InsertTeamName
 
-- [Code](maxcut_optimized.ipynb)
-- [Documentation](InsertTeamCode.ipynb)
+- [Code](InsertTeamName/maxcut_optimized.ipynb)
+- [Documentation](InsertTeamName/InsertTeamCode.ipynb)
