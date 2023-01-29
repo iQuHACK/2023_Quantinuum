@@ -5,4 +5,4 @@
 
 We optimized the code for `maxcut_notebook.ipynb` to have a max energy of 5.45 (originally 4.9).
 
-[Presentation](InsertTeamName.pdf)
+[Presentation](https://docs.google.com/presentation/d/1fsOol0NpJGDIoOYtIftI68TNxrQ3CTpgLMtFwuzip2Q/edit?usp=sharing)
