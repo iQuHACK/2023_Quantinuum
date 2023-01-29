@@ -2,5 +2,5 @@
 
 ### Sample Team
 
-- [Code](TEAM_NAME)
-- [Documentation](https://url_to_documentation.com)
+- [Carls](https://github.com/micah-roberson/2023_Quantinuum/tree/main/team_solutions/Carls)
+- [Documentation](https://github.com/micah-roberson/2023_Quantinuum/tree/main/team_solutions/Carls)
