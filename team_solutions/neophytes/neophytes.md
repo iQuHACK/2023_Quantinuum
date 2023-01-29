@@ -58,10 +58,11 @@ concrete values of cost and mixer at each iteration and return a new circuit wit
 concrete values without re-compiling it.
 
 
-By combining the optimizations from Challenges #1 and #4, we observe the following
-speedup (32%) compared to the baseline without optimizations (average of 5 runs
+By combining the optimizations from Challenges #1 and #4 and then #1, #4 and 4,
+we observe the following speedup (32% and 43%, respectively) compared to the baseline
+without optimizations (average of 5 runs
 with 100 iterations and 5000 shots):
 
-|                     | Baseline | Challs #1 and #4 |
-|---------------------|----------|------------------|
-| Total run time (ms) |   90809  |      61419       |
+|                     | Baseline | Challs #1 and #4 | Challs #1, #3 and #4 |
+|---------------------|----------|------------------|----------------------|
+| Total run time (ms) |   90809  |      61419       |   51238              |
