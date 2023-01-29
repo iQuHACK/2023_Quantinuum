@@ -12,4 +12,5 @@ Code:
 * [Symbolic Compiler](maxcut_symbolic_compiler.ipynb)
 * [Binary Lifting](maxcut_notebook-optimizecompilation-binarylifting.ipynb)
 * [Precomputation](maxcut_notebook_precompute_all.ipynb)
-5. Other open-ended investigation
+4. Other open-ended investigation
+* [Interpolation](maxcut_interpolate.py)
