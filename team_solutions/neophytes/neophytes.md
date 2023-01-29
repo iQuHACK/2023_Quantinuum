@@ -20,8 +20,13 @@ For an optimization with 200 iterations, and 5000 shots, the results are shown i
 
 |               | Naive  | Neophytes |
 |---------------|--------|-----------|
-| Energy        | 5.03   | 5.49      |
+| Energy        | 5.03   | 5.46      |
 | Success Ratio | 0.3634 | 0.5640    |
+
+Neophytes results angles
+
+Best Cost Angles: [0.38376821141182077, 0.739944298103698, 0.7692712948168382]
+Best Mixer Angles: [0.39408217332547335, 0.25219105619534044, 0.1504924633149269]
 
 ![Gradient Ascent Method with Momentum Term](neophytes.png)
 
