@@ -17,21 +17,21 @@ Those are:
 
 
 # 1
-<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png">
+<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="400">
 
 # 2
-<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png">
+<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="400">
 
 # 3
-<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png">
+<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="400>
 
 # 4
-<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png">
+<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="400>
 
 # 5
-<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png">
+<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="400>
 
 # 6
-<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png">
+<img src="https://github.com/micah-roberson/2023_Quantinuum/blob/main/team_solutions/Carls/Results/case1.png" width="400>
 
 
