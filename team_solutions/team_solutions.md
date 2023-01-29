@@ -1,6 +1,6 @@
 # List of Projects
 
-### Sample Team
+### QUKnights
 
-- [Code](TEAM_NAME)
+- [Code](QUKnights)
 - [Documentation](https://url_to_documentation.com)
