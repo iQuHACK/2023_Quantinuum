@@ -1,3 +1,5 @@
+import time
+
 from scipy.optimize import approx_fprime
 from typing import Callable, List, Tuple
 from sympy.core.symbol import Symbol
@@ -33,8 +35,9 @@ def main():
     backend = AerBackend()
 
     shots = 5000
-    iterations = 200
+    iterations = 100
     seed = 12345
+    start = time.time()
     res_neophytes = qaoa_calculate(
         backend,
         backend.default_compilation_pass(2).apply,
@@ -42,6 +45,9 @@ def main():
         iterations=iterations,
         seed=seed
     )
+
+    end = time.time()
+    print(f"Total time for {iterations} iterations (ms): {(end - start) * 1000}")
 
     plot_maxcut_results(
         res_neophytes,
@@ -323,6 +329,11 @@ def qaoa_max_cut_circuit_fill(
     circ.symbol_substitution(sym_args)
 
     return circ
+
+# def noise_reduc_compilation(
+#         circ: Circuit,
+#         gates
+# ) -> Bool
 
 if __name__ == "__main__":
     main()
