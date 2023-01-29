@@ -11,9 +11,9 @@ from pytket import Circuit, Qubit
 from pytket.backends.backend import Backend
 from pytket.backends.backendresult import BackendResult
 from pytket.extensions.qiskit import AerBackend
-from pytket.extensions.quantinuum import QuantinuumBackend
+from pytket.passes.auto_rebase import auto_rebase_pass
 
-from pytket.passes import DecomposeBoxes
+from pytket.passes import DecomposeBoxes, RemoveRedundancies
 from pytket.pauli import Pauli, QubitPauliString
 from pytket.utils import QubitPauliOperator, gen_term_sequence_circuit
 
@@ -311,8 +311,13 @@ def qaoa_max_cut_circuit_symbolic(
             mixer_ham_sym, Circuit(n_nodes)))
 
     DecomposeBoxes().apply(qaoa_circuit_sym)
-    # TODO
-    qaoa_circuit_sym = backend.get_compiled_circuit(qaoa_circuit_sym)
+
+    gate_set = backend.backend_info.gate_set
+    auto_rebaser = auto_rebase_pass(gateset=gate_set)
+    auto_rebaser.apply(qaoa_circuit_sym)
+
+    RemoveRedundancies().apply(qaoa_circuit_sym)
+
     return cost_syms, mixer_syms, qaoa_circuit_sym
 
 
