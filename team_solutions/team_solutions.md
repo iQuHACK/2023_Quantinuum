@@ -1,6 +1,6 @@
 # List of Projects
 
-### Sample Team
+### InsertTeamName
 
-- [Code](TEAM_NAME)
-- [Documentation](https://url_to_documentation.com)
+- [Code](InsertTeamName/maxcut_optimized.ipynb)
+- [Documentation](InsertTeamName/InsertTeamCode.ipynb)
