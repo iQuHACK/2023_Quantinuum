@@ -155,17 +155,17 @@ cost_angle = 1.0
 cost_ham_qpo = qaoa_graph_to_cost_hamiltonian(max_cut_graph_edges, cost_angle)
 print(cost_ham_qpo)
 
-# backend = AerBackend()
-backend = QuantinuumBackend("H1-2E")
+backend = AerBackend()
+# backend = QuantinuumBackend("H1-2E")
 # Total time for 100 iterations (ms): 87038.1588935852 80150.33507347107
 comp = backend.get_compiled_circuit
-iters = 1
+iters = 10
 # 86
 start = time.time()
 res = qaoa_calculate(
     backend,
     backend.default_compilation_pass(2).apply,
-    shots=1,
+    shots=5000,
     iterations=iters,
     seed=12345,
 )

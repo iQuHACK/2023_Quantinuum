@@ -93,7 +93,7 @@ def qaoa_instance_simple(
         cost_syms: List[Symbol],
         mixer_syms: List[Symbol],
         sym_circ: Circuit,
-        compiler_pass: Callable[[Circuit], bool],
+        # compiler_pass: Callable[[Circuit], bool],
         guess_mixer_angles: np.array,
         guess_cost_angles: np.array,
         seed: int,
@@ -209,7 +209,7 @@ n_nodes_ = 7
 
 max_cut_graph_ = nx.Graph()
 max_cut_graph_.add_edges_from(max_cut_graph_edges)
-nx.draw(max_cut_graph_, labels={node: node for node in max_cut_graph_.nodes()})
+# nx.draw(max_cut_graph_, labels={node: node for node in max_cut_graph_.nodes()})
 
 expected_results = [(0, 1, 0, 0, 1, 0, 0), (1, 0, 1, 1, 0, 1, 1)]
 
@@ -218,9 +218,7 @@ cost_ham_qpo_ = qaoa_graph_to_cost_hamiltonian(max_cut_graph_edges, cost_angle_)
 print(cost_ham_qpo_)
 
 # backend_ = AerBackend()
-# backend_ = QuantinuumBackend("H1-2E")
-token = "238aa0e9c4fd55ece50a6cdcbd77ebc56fc0180c007cfc85137c3cb9536818db4424175b45f016d400261dee6d0a14423cddbc4de95066110f27679451828518"
-backend_ = IBMQEmulatorBackend("ibmq_quito", token=token)
+backend_ = QuantinuumBackend("H1-2SC")
 
 # Create a symbolic circuit and collect the symbols
 cost_syms_, mixer_syms_, sym_circ_ = qaoa_max_cut_circuit_symbolic(
@@ -234,7 +232,7 @@ res_ = qaoa_calculate(
     mixer_syms=mixer_syms_,
     sym_circ=sym_circ_,
     # compiler_pass=backend_.default_compilation_pass(2).apply,
-    shots=50,
+    shots=5000,
     iterations=iters,
     seed=12345,
 )
@@ -242,4 +240,4 @@ res_ = qaoa_calculate(
 end = time.time()
 print(f"Total time for {iters} iterations (ms): {(end - start) * 1000}")
 
-plot_maxcut_results(res_, 6)
+# plot_maxcut_results(res_, 6)
