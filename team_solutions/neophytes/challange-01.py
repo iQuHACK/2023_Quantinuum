@@ -15,6 +15,8 @@ from pytket.pauli import QubitPauliString, Pauli
 from pytket import Circuit, Qubit
 import numpy as np
 
+from scipy.optimize import approx_fprime, minimize
+
 
 def qaoa_graph_to_cost_hamiltonian(
         edges: List[Tuple[int, int]], cost_angle: float
@@ -80,6 +82,22 @@ def max_cut_energy(edges: List[Tuple[int, int]], results: BackendResult) -> floa
 
 from pytket.backends.backend import Backend
 
+def my_qaoa_instance(angles,
+                     backend,
+                     compiler_pass,
+                     seed,
+                     shots):
+    n = len(angles) // 2
+    guess_mixer_angles = angles[:n]
+    guess_cost_angles = angles[n:]
+    return qaoa_instance_simple(
+            backend,
+            compiler_pass,
+            guess_mixer_angles,
+            guess_cost_angles,
+            seed=seed,
+            shots=shots,
+        )
 
 def qaoa_instance_simple(
         backend: Backend,
@@ -108,17 +126,48 @@ def qaoa_optimise_energy(
         shots: int = 5000,
         seed: int = 12345,
 ):
-    highest_energy = 0
-    best_guess_mixer_angles = [0 for i in range(n)]
-    best_guess_cost_angles = [0 for i in range(n)]
+    # highest_energy = 0
+    # best_guess_mixer_angles = [0 for i in range(n)]
+    # best_guess_cost_angles = [0 for i in range(n)]
     rng = np.random.default_rng(seed)
     # guess some angles (iterations)-times and try if they are better than the best angles found before
 
+    guess = rng.uniform(0, 1, 2 * n)
+    best_energy = 0
+    step_size = 0.01
+    # result = minimize(my_qaoa_instance,
+    #                   guess, args=(
+    #                        backend,
+    #                        compiler_pass,
+    #                        seed,
+    #                        shots),
+    #                   method="Nelder-Mead"
+    #                        )
+    diff = 0
+    decay_rate = 0.01
     for i in range(iterations):
+        print(f"Iteration: {i}")
+        fprime = approx_fprime(guess,
+                               my_qaoa_instance,
+                               1.5e-3,
+                               backend,
+                               compiler_pass,
+                               seed,
+                               shots
+                               )
 
-        guess_mixer_angles = rng.uniform(0, 1, n)
-        guess_cost_angles = rng.uniform(0, 1, n)
-
+        print(f"fprime shape: {fprime.shape}")
+        print(f"fprime: {fprime}")
+        print(f"guess: {guess}")
+        diff = decay_rate * diff + step_size * fprime
+        print(f"diff: {diff}")
+        print(f"norm fprime: {np.linalg.norm(fprime)}")
+        if np.linalg.norm(fprime) < 1e-4:
+            break
+        guess += diff
+        guess = [x % 1 for x in guess]
+        guess_mixer_angles = guess[:n]
+        guess_cost_angles = guess[n:]
         qaoa_energy = qaoa_instance_simple(
             backend,
             compiler_pass,
@@ -128,16 +177,34 @@ def qaoa_optimise_energy(
             shots=shots,
         )
 
-        if qaoa_energy > highest_energy:
-            print("new highest energy found: ", qaoa_energy)
+        print("energy found: ", qaoa_energy)
+        if qaoa_energy < best_energy:
+            # guess = guess - step_size * fprime
+            print("lower than before")
+            # step_size = step_size / 2
+            # continue
+        else:
+            best_energy = qaoa_energy
 
-            best_guess_mixer_angles = guess_mixer_angles
-            best_guess_cost_angles = guess_cost_angles
-            highest_energy = qaoa_energy
+        # for i in range(iterations):
+        #
+        #     guess_mixer_angles = rng.uniform(0, 1, n)
+        #     guess_cost_angles = rng.uniform(0, 1, n)
+        #
 
-    print("highest energy: ", highest_energy)
-    print("best guess mixer angles: ", best_guess_mixer_angles)
-    print("best guess cost angles: ", best_guess_cost_angles)
+
+        #
+        #     best_guess_mixer_angles = guess_mixer_angles
+        #     best_guess_cost_angles = guess_cost_angles
+        #     highest_energy = qaoa_energy
+
+    # print("highest energy: ", highest_energy)
+    # print("best guess mixer angles: ", best_guess_mixer_angles)
+    # print("best guess cost angles: ", best_guess_cost_angles)
+    best_guess_mixer_angles = guess[:n]
+    best_guess_cost_angles = guess[n:]
+    # best_guess_mixer_angles = result.x[:n]
+    # best_guess_cost_angles = result.x[n:]
     return best_guess_mixer_angles, best_guess_cost_angles
 
 
