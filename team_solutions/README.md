@@ -1,4 +1,4 @@
-![Logo](https://github.com/GloverTheProgrammer/Espada/blob/main/suppport/wordmark-01.png?raw=true)
+![Logo](https://github.com/GloverTheProgrammer/Espada/blob/main/team_solutions/suppport/wordmark-01.png?raw=true)
 
 
 # Espada
