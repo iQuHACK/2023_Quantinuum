@@ -330,10 +330,6 @@ def qaoa_max_cut_circuit_fill(
 
     return circ
 
-# def noise_reduc_compilation(
-#         circ: Circuit,
-#         gates
-# ) -> Bool
 
 if __name__ == "__main__":
     main()
