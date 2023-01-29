@@ -1,0 +1,38 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-qsearch-staging-30630-authRole",
+      "UnauthRoleArn": "arn:aws:iam::783779965483:role/amplify-qsearch-staging-30630-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::783779965483:role/amplify-qsearch-staging-30630-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-qsearch-staging-30630-deployment",
+      "UnauthRoleName": "amplify-qsearch-staging-30630-unauthRole",
+      "StackName": "amplify-qsearch-staging-30630",
+      "StackId": "arn:aws:cloudformation:us-east-2:783779965483:stack/amplify-qsearch-staging-30630/ee0c8970-9f81-11ed-bc6a-02a4b2d59540",
+      "AmplifyAppId": "d27z1wzzrbuzui"
+    },
+    "categories": {
+      "auth": {
+        "CleverCart": {}
+      }
+    }
+  },
+  "arojha": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-clevercart-arojha-144012-authRole",
+      "UnauthRoleArn": "arn:aws:iam::783779965483:role/amplify-clevercart-arojha-144012-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::783779965483:role/amplify-clevercart-arojha-144012-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-clevercart-arojha-144012-deployment",
+      "UnauthRoleName": "amplify-clevercart-arojha-144012-unauthRole",
+      "StackName": "amplify-clevercart-arojha-144012",
+      "StackId": "arn:aws:cloudformation:us-east-2:783779965483:stack/amplify-clevercart-arojha-144012/d0362550-4801-11ed-bab2-0ace75496d7c",
+      "AmplifyAppId": "d3dq9oquclu5yp"
+    },
+    "categories": {
+      "auth": {
+        "CleverCart": {}
+      }
+    }
+  }
+}
