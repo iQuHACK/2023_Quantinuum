@@ -93,12 +93,13 @@ def qaoa_instance_simple(
     # step 1: get state guess
     my_prep_circuit = qaoa_max_cut_circuit(
         max_cut_graph_edges, n_nodes, guess_mixer_angles, guess_cost_angles
-    ) # build the circuit
-    measured_circ = my_prep_circuit.copy().measure_all() # measure the circuit
-    compiler_pass(measured_circ) # compile the circuit
-    res = backend.run_circuit(measured_circ, shots, seed=seed) # run the circuit
+    )
+    measured_circ = my_prep_circuit.copy().measure_all()
+    compiler_pass(measured_circ)
+    res = backend.run_circuit(measured_circ, shots, seed=seed)
 
-    return max_cut_energy(max_cut_graph_edges, res) # return the energy of the circuit
+    return max_cut_energy(max_cut_graph_edges, res)
+
 
 def qaoa_optimise_energy(
     compiler_pass: Callable[[Circuit], bool],
