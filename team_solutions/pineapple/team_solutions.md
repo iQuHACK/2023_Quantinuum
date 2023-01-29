@@ -3,8 +3,13 @@
 [Documentation](https://www.overleaf.com/read/tzjzwhxkhnzx)
 
 Code:
-* Question 2
-** [SGD](maxcutSGD.py)
-* Question 2
-** [Minimum Dominating Set](minimum_dominating_set.ipynb)
-** [Four Coloring](four_color.ipynb)
+1. Optimization
+* [SGD](maxcutSGD.py)
+2. Mapping Other Problems
+* [Minimum Dominating Set](minimum_dominating_set.ipynb)
+* [Four Coloring](four_color.ipynb)
+3. Reducing Compilation Time
+* [Symbolic Compiler](maxcut_symbolic_compiler.ipynb)
+* [Binary Lifting](maxcut_notebook-optimizecompilation-binarylifting.ipynb)
+* [Precomputation](maxcut_notebook_precompute_all.ipynb)
+5. Other open-ended investigation
