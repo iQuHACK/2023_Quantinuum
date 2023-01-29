@@ -1,4 +1,4 @@
-# Neophytes Challange Report
+# Neophytes Challenge Report
 
 
 ## Challenge 1: Classical Optimization using Stochastic Gradient Descent
