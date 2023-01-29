@@ -17,11 +17,3 @@ In this iQuHack challenge, we will be working on improving the implementation of
 **Problem:**
 The Max-Cut problem is a well-known problem in graph theory and can be described as follows: Imagine you have a big picture with lots of dots (nodes) and lines (edges) connecting some of the dots. The goal is to color some of the dots red and the rest blue in a way that there are as many lines as possible connecting dots of different colors.
 
-**Contributions:**
-
-* Jaydin F
-* David G
-* Ken
-* Jack
-* Iman
-
